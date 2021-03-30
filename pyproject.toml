@@ -1,6 +1,6 @@
 [project]
 name = "braket-backend-blueqat"
-version = "0.0.1"
+version = "0.0.1-dev"
 description = "Braket backend for blueqat"
 license = "Apache-2.0"
 authors = "gyu-don <kato@blueqat.com>"
