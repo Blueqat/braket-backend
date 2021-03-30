@@ -1,8 +1,7 @@
 # This is a basic workflow to help you get started with Actions
+name: "Update _version.py"
 
-name: CI
-
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
@@ -28,12 +27,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       - name: Update version
         run: sed -n 's/^version\s*=\s*"\(.*\)"/__version__ = "\1"/p' pyproject.toml > bqbraket/_version.py
 
       - name: Commit version file
-      - uses: EndBug/add-and-commit@v7.1.0
+        uses: EndBug/add-and-commit@v7.1.0
         with:
           author_name: gyu-don
           author_email: kato@blueqat.com
