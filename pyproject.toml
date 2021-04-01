@@ -5,5 +5,9 @@ description = "Braket backend for blueqat"
 license = "Apache-2.0"
 authors = "gyu-don <kato@blueqat.com>"
 
+[install_requires]
+blueqat = ">=0.4.2"
+braket = "~=1.5.13"
+
 [build-system]
-requires = ["blueqat>=0.4.2", "braket~=1.5.13"]
+requires = ["wheel", "setuptools"]
