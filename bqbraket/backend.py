@@ -72,7 +72,7 @@ def _apply_2qubitgate(g: TwoQubitGate, n_qubits: int,
     name = name_alias.get(str(g.lowername)) or str(g.lowername)
     method = getattr(c, name)
     for t in g.control_target_iter(n_qubits):
-        method(*g.params, t)
+        method(*g.params, *t)
 
 
 @_apply.register
