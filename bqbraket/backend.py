@@ -23,7 +23,7 @@ name_alias = {
     "sxdg": "vi",
     "tdg": "ti",
     "cr": "cphaseshift",
-    "cx": "cnot"
+    "cx": "cnot",
     "rxx": "xx",
     "ryy": "yy",
     "rzz": "zz",

@@ -1,13 +1,3 @@
-[project]
-name = "braket-backend-blueqat"
-version = "0.0.1-dev"
-description = "Braket backend for blueqat"
-license = "Apache-2.0"
-authors = "gyu-don <kato@blueqat.com>"
-
-[install_requires]
-blueqat = ">=0.4.2"
-braket = "~=1.5.13"
-
 [build-system]
 requires = ["wheel", "setuptools"]
+build-backend = "setuptools.build_meta"
