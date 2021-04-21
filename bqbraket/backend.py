@@ -1,5 +1,6 @@
 """Blueqat Backend for converting the circuit to Braket Circuit"""
 from functools import singledispatch
+from typing import List
 
 from blueqat import Circuit as BlueqatCircuit
 from blueqat import BlueqatGlobalSetting
@@ -10,7 +11,7 @@ from braket.circuits import Circuit as BraketCircuit
 
 class BraketConverterBackend(Backend):
     @staticmethod
-    def run(gates: list[Operation], n_qubits: int) -> BraketCircuit:
+    def run(gates: List[Operation], n_qubits: int) -> BraketCircuit:
         c = BraketCircuit()
         for g in gates:
             _apply(g, n_qubits, c)
