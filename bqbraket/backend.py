@@ -19,12 +19,12 @@ class BraketConverterBackend(Backend):
 
 
 name_alias = {
-    "r": "phaseshift",
+    "phase": "phaseshift",
     "sdg": "si",
     "sx": "v",
     "sxdg": "vi",
     "tdg": "ti",
-    "cr": "cphaseshift",
+    "cphase": "cphaseshift",
     "cx": "cnot",
     "rxx": "xx",
     "ryy": "yy",
