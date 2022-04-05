@@ -20,11 +20,16 @@ BASIS: Dict[str, List[str]] = {
 class BraketConverterBackend(Backend):
     @staticmethod
     def run(gates: List[Operation], n_qubits: int,
-            transpile: Optional[List[str]] = None) -> BraketCircuit:
+            transpile: Optional[List[str]] = None,
+            avoid_empty_circuit: bool = True) -> BraketCircuit:
         if transpile:
             c = BlueqatCircuit(n_qubits=n_qubits, ops=gates)
             c = c.run_with_2q_decomposition(basis=transpile, mat1_decomposer=ryrz_decomposer)
             gates = c.ops
+        if len(gates) == 0 and avoid_empty_circuit:
+            if n_qubits == 0:
+                raise ValueError('0 qubits circuit is always empty.')
+            gates = BlueqatCircuit().i[n_qubits - 1].ops
         bc = BraketCircuit()
         for g in gates:
             _apply(g, n_qubits, bc)
@@ -113,6 +118,19 @@ def register_backend(name: str = 'braketconverter',
                                           allow_overwrite)
 
 
-def convert(c: BlueqatCircuit, transpile: Optional[List[str]] = None) -> BraketCircuit:
-    """Convert circuit."""
-    return BraketConverterBackend.run(c.ops, c.n_qubits, transpile)
+def convert(c: BlueqatCircuit,
+            transpile: Optional[List[str]] = None,
+            avoid_empty_circuit: bool = True) -> BraketCircuit:
+    """Convert circuit.
+
+    Args:
+    c: Blueqat circuit which to be converted
+    transpile: If a list of 2-qubit gates is given, transpile the circuit with
+    specified gates as a basis. If None, don't transpile.
+    avoid_empty_circuit: If True and given circuit or transpiled circuit is empty,
+    insert dummy I gate.
+
+    Returns:
+    Converted Braket Circuit
+    """
+    return BraketConverterBackend.run(c.ops, c.n_qubits, transpile, avoid_empty_circuit)
